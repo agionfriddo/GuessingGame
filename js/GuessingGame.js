@@ -62,6 +62,14 @@ Game.prototype.checkGuess = function() {
 		$('#submit, #hint').prop('disabled', true);
 		return "You Lose. The correct number was " + this.winningNumber + "."
 	}
+
+	if(this.isLower()) {
+		$('#directions').text('Guess Higher!');
+	}
+	else {
+		$('#directions').text("Guess Lower!");
+	};
+
 	if(this.difference() < 10)
 		return "You're burning up!"
 	else if(this.difference() < 25)
@@ -77,7 +85,8 @@ var newGame = function() {
 };
 
 Game.prototype.provideHint = function() {
-	return shuffle([this.winningNumber, generateWinningNumber(), generateWinningNumber()])
+	var hintArray = [this.winningNumber, generateWinningNumber(), generateWinningNumber()]
+	return shuffle(hintArray);
 }
 
 $(document).ready(function() {
@@ -102,7 +111,7 @@ $(document).ready(function() {
 
 	$('#reset').click(function() {
 		game = newGame();
-		$('#subtitle').text('A Guessing Game of Epic Proportions')
+		$('#subtitle').text('A Game of Wit and Cunning')
 		$('#directions').text('Guess a number between 1 and 100')
 		$('#guess-list li').text('-');
 		$('#hint, #submit').prop('disabled', false);
