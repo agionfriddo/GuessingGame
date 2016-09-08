@@ -33,7 +33,6 @@ Game.prototype.isLower = function() {
 
 Game.prototype.playersGuessSubmission = function(guess) {
 	if(guess > 100 || guess < 1 || isNaN(guess)) {
-		$('#subtitle').text("Remember, I want a number between 1 and 100!")
 		throw "That is an invalid guess."
 	};
 	this.playersGuess = guess;
@@ -60,7 +59,7 @@ Game.prototype.checkGuess = function() {
 	if(this.pastGuesses.length === 5) {
 		$('#directions').text("Click reset to play again!");
 		$('#submit, #hint').prop('disabled', true);
-		return "You Lose. The correct number was " + this.winningNumber + "."
+		return "You Lose. The correct number was " + this.winningNumber + ".";
 	}
 
 	if(this.isLower()) {
@@ -103,6 +102,7 @@ $(document).ready(function() {
 		makeAGuess(game);
 	});
 
+
 	$('#player-input').keypress(function(event) {
 		if(event.which == 13) {
 			makeAGuess(game);
@@ -121,5 +121,4 @@ $(document).ready(function() {
 		var hints = game.provideHint();
 		$('#subtitle').text("The winning number is " + hints[0] + ", " + hints[1] + ", or " + hints[2] + ".");
 	});
-
 });
